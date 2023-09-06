@@ -161,12 +161,21 @@ Trata-se do recurso que permite associar a porta de um container com a porta da 
 docker container run -d -p 8080:80 nginx
 
 ```
-## Dockerfile
+## Contruindo uma Imagem Docker
+
+Processo de contrução de imagens Docker para que posteriormente possam ser lançadas como conteiners.
+
+### Dockerfile
 
 Trata-se do arquivo que contém os passos para a contrução de uma imagem Docker.
-**Importante:** Toda imagem é construída baseada em uma imagem base.
 
-- Dockerfile para contrução de uma imagem de uma aplicação NodeJs:
+**Importante:** 
+- Toda imagem é construída baseada em uma imagem base.
+- Por convenção, o arquivo deve ser nomeado como *Dockerfile".
+- Cada comando executado, será uma camada na estrutura da imagem Docker.
+- O container é uma camada superior a imagem que utiliza sua referencia para ser executado.
+
+- Arquivo Dockerfile para contrução de uma imagem de uma aplicação NodeJs:
 
 ```hcl
 
@@ -192,6 +201,74 @@ EXPOSE 8080
 CMD ["node", "server.js"]
 
 ```
+
+### Instruções do Dockerfile
+
+- FROM: Iniciliza a construção de uma imagem Docker a partir de uma imagem base.
+- WORKDIR: Define o diretório corrente.
+- RUN: Executa um comando.
+- LABEL: Adiciona metadados na imagem.
+- EXPOSE: Define a porta que o container vai expor.
+- ENV: Define variáveis de ambiente.
+- COPY: Copia arquivos ou diretórios e adiciona ao sistema de arquivos da imagem.
+- ADD: Copia arquivos ou diretórios remotos e adiciona ao sistema de arquivos da imagem.
+- CMD: Define o comando e/ou parâmetros padrão.
+- ARG: Define um argumento para ser utilizado no processo de construção.
+- ENTRYPOINT: Configura um container para que opere como um executável.
+- VOLUME: Define volumes para o conteiner.
+
+| Instrução | Objetivo | 
+| ---- | ----- | 
+| **FROM** | Iniciliza a construção de uma imagem Docker a partir de uma imagem base. | 
+| **WORKDIR** | Define o diretório corrente. |
+| **RUN** | Executa um comando. |
+| **LABEL** |  |
+| **EXPOSE** |  |
+| **ENV** |  |
+| **COPY** |  |
+| **ADD** |  |
+| **CMD** |  |
+| **ARG** |  |
+| **ENTRYPOINT** |  |
+| **VOLUME** |  |
+
+### Docker Build
+
+Trata-se do comando Docker para construção de uma imagem Docker baseando-se no arquivo Dockerfile.
+
+**Importante:** 
+- O comando *docker build* deve ser executando no mesmo contexto do arquivo Dockerfile, ou seja, no mesmo diretório.
+
+- Comando para construção de uma imagem Docker:
+
+```hcl
+
+docker build -t nomedaimagem .
+
+```
+
+```hcl
+
+- Comando para executar o container realizando um Port Bind para a porta 8080
+
+docker container run -p 8080:8080 -d nomedocontainer
+
+```
+## Docker Registry
+
+Trata-se do repositório de imagens Docker. Seu objetivo é disponibilizar imagens Docker em um ambiente comum e assim otimizar o trabalho de equipes de desenvolvimento permitindo que baixem e utilizem essas imagens. 
+
+Existem diversas opções de Registry no mercado:
+
+- Docker Hub.
+- AWS Elastic Container Registry.
+- Azure Container Registry.
+- Google Container Registry.
+
+### Docker Hub
+
+É o principal repositório de imagens Docker do mercado (hub.docker.com). Permite repositórios públicos e privados.
+
 
 ## Docker Compose
 
