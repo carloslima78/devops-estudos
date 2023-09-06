@@ -31,13 +31,14 @@ sudo systemctl status docker
 
 ## Comandos Básicos do Docker
 
-- Comando para lançar o clássico e acadêmico container **Hello World**: 
+Criação do clássico e acadêmico container **Hello World**, é executado baseado na imagem *hello-world*, e sua funcialiade é imprimir as instruções de utilização do Docker e logo em seguida é encerrado:
 
-Este container será executado baseado na imagem *hello-world*, que apenas imprime as instruções de utilização do Docker e logo em seguida é encerrado:
+- Comando para lançar o container **Hello World**: 
+
 
 ```hcl
 
-docker contaner run hello-world
+docker container run hello-world
 
 ```
 
@@ -158,6 +159,37 @@ Trata-se do recurso que permite associar a porta de um container com a porta da 
 ```hcl
 
 docker container run -d -p 8080:80 nginx
+
+```
+## Dockerfile
+
+Trata-se do arquivo que contém os passos para a contrução de uma imagem Docker.
+**Importante:** Toda imagem é construída baseada em uma imagem base.
+
+- Dockerfile para contrução de uma imagem de uma aplicação NodeJs:
+
+```hcl
+
+# Especifica a imagem base para a criação da imagem da aplicação.
+FROM node
+
+# Especifica o diretório na imagem onde serão incluídos os elementos da aplicação.
+WORKDIR /app
+
+# Copia os arquivos necessários do diretório corrente.
+COPY package.json .
+
+# Executa o comando de instalação para baixar todas as dependências necessárias para a imagem.
+RUN npm install
+
+# Copia todos os demais arquivos necessários.
+COPY . .
+
+# Especifica a porta onde a aplicação será executada. 
+EXPOSE 8080
+
+# Comando para executar a aplicação.
+CMD ["node", "server.js"]
 
 ```
 
