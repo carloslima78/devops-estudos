@@ -2,13 +2,6 @@
 
 To Do
 
-## Docker Registry
-
-Tratam-se dos repositórios para armazenamento e compartilhamento de imagens Docker, e o mais popular é o Docker Hub.
-
-https://hub.docker.com/
-
-
 ## Instalação do Docker
 
 Passos para instalação do Docker no ambiente Linux Ubuntu:
@@ -171,7 +164,7 @@ Trata-se do arquivo que contém os passos para a contrução de uma imagem Docke
 
 **Importante:** 
 - Toda imagem é construída baseada em uma imagem base.
-- Por convenção, o arquivo deve ser nomeado como *Dockerfile".
+- Por convenção, o arquivo deve ser nomeado como **Dockerfile**.
 - Cada comando executado, será uma camada na estrutura da imagem Docker.
 - O container é uma camada superior a imagem que utiliza sua referencia para ser executado.
 
@@ -204,33 +197,28 @@ CMD ["node", "server.js"]
 
 ### Instruções do Dockerfile
 
-- FROM: Iniciliza a construção de uma imagem Docker a partir de uma imagem base.
-- WORKDIR: Define o diretório corrente.
-- RUN: Executa um comando.
-- LABEL: Adiciona metadados na imagem.
-- EXPOSE: Define a porta que o container vai expor.
-- ENV: Define variáveis de ambiente.
-- COPY: Copia arquivos ou diretórios e adiciona ao sistema de arquivos da imagem.
-- ADD: Copia arquivos ou diretórios remotos e adiciona ao sistema de arquivos da imagem.
-- CMD: Define o comando e/ou parâmetros padrão.
-- ARG: Define um argumento para ser utilizado no processo de construção.
-- ENTRYPOINT: Configura um container para que opere como um executável.
-- VOLUME: Define volumes para o conteiner.
-
 | Instrução | Objetivo | 
 | ---- | ----- | 
-| **FROM** | Iniciliza a construção de uma imagem Docker a partir de uma imagem base. | 
-| **WORKDIR** | Define o diretório corrente. |
-| **RUN** | Executa um comando. |
-| **LABEL** |  |
-| **EXPOSE** |  |
-| **ENV** |  |
-| **COPY** |  |
-| **ADD** |  |
-| **CMD** |  |
-| **ARG** |  |
-| **ENTRYPOINT** |  |
-| **VOLUME** |  |
+| FROM | Iniciliza a construção de uma imagem Docker a partir de uma imagem base. | 
+| WORKDIR | Define o diretório corrente. |
+| RUN | Executa um comando. |
+| LABEL | Adiciona metadados na imagem. |
+| EXPOSE | Define a porta que o container vai expor. |
+| ENV | Define variáveis de ambiente. |
+| COPY | Copia arquivos ou diretórios e adiciona ao sistema de arquivos da imagem. |
+| ADD | Copia arquivos ou diretórios remotos e adiciona ao sistema de arquivos da imagem. |
+| CMD | Define o comando e/ou parâmetros padrão. |
+| ARG | Define um argumento para ser utilizado no processo de construção. |
+| ENTRYPOINT | Configura um container para que opere como um executável. |
+| VOLUME | Define volumes para o conteiner. |
+
+### Docker Ignore
+
+Trata-se do arquivo que aponta o conteúdo que não deve ser considerado para a contrução de uma imagem Docker. 
+
+**Importante:** 
+- Por convenção, o arquivo deve ser nomeado como **.dockerignore**.
+- Conceito similar ao *.gitignore*.
 
 ### Docker Build
 
@@ -247,16 +235,16 @@ docker build -t nomedaimagem .
 
 ```
 
-```hcl
-
 - Comando para executar o container realizando um Port Bind para a porta 8080
+
+```hcl
 
 docker container run -p 8080:8080 -d nomedocontainer
 
 ```
 ## Docker Registry
 
-Trata-se do repositório de imagens Docker. Seu objetivo é disponibilizar imagens Docker em um ambiente comum e assim otimizar o trabalho de equipes de desenvolvimento permitindo que baixem e utilizem essas imagens. 
+Trata-se do repositório de imagens Docker. Seu objetivo é disponibilizar imagens Docker em um ambiente comum e assim otimizar o trabalho de equipes de desenvolvimento permitindo a distribuição dessas imagens. 
 
 Existem diversas opções de Registry no mercado:
 
@@ -267,8 +255,74 @@ Existem diversas opções de Registry no mercado:
 
 ### Docker Hub
 
-É o principal repositório de imagens Docker do mercado (hub.docker.com). Permite repositórios públicos e privados.
+É o principal repositório de imagens Docker do mercado (hub.docker.com). Permite a publicação de repositórios públicos e privados.
 
+### Convenção de Nomes para Imagens
+
+Para publicação de imagens *não oficiais* no Docker Hub, é necessário seguir uma nomencaltura de nomes:
+
+**Exemplo:** *namespace/repositorio:tag* -> *carloslimadocker78/nome-da-imagem:v1*
+**Observações:** 
+- O namespace nada mais é que o nome da sua conta no Docker Hub.
+- Imagens oficiais não usam Namespace, ex: *ubuntu:22.04*
+
+Passo a passo para publicar uma imagem no Docker Hub:
+
+- Construa a imagem:
+
+```hcl
+
+docker build -t conversao-temperatura .
+
+```
+
+- Faça o tageamento da imagem *(Não obrigatório, mas é uma boa prática.)*
+
+```hcl
+
+docker tag conversao-temperatura carloslimadocker78/conversao-temperatura:v1
+
+```
+
+- Comando para tagear a imagem *latest* para que seja a última versão no repositório:
+
+```hcl
+
+docker tag conversao-temperatura carloslimadocker78/conversao-temperatura:latest
+
+```
+
+- Login na conta do Docker Hub *(Entrar com Username e Password da conta)*
+
+```hcl
+
+docker login
+
+```
+
+- Comando para publicar a imagem com a tag v1:
+
+```hcl
+
+carloslimadocker78/conversao-temperatura:v1
+
+```
+
+- Comando para publicar a imagem com a tag latest:
+
+```hcl
+
+docker push carloslimadocker78/conversao-temperatura:latest
+
+```
+
+- Execute o container basedo na imagem publicada no Docker Hub:
+
+```hcl
+
+docker container run -d -p 8080:8080 carloslimadocker78/conversao-temperatura:v1
+
+```
 
 ## Docker Compose
 
