@@ -1,7 +1,8 @@
 # Docker
 
-- Docker é a empresa que criou o Docker Engine.
-- Docker Engine é uma ferramenta para criar e interagir com containers Linux.
+Docker Engine trata-se de uma ferramenta para criar e interagir com containers Linux.
+
+- **Docker** é a empresa que criou o **Docker Engine**.
 - Conteiners existem a bastante tempo no Linux, o Docker apenas disponibiliza um ferramental para interagir com os conteiners.
 - Embora containers seajam executados em ambientes Windows, Linux e Mac, em ambiente Linux é mais performático, pois containers são naturalmente Linux.
 
@@ -208,13 +209,13 @@ Tratam-se de configurações que podem ser definidas e acessados ​​durante a
 #### Container Postgres
 
 - Será um container baseado na imagem **postgres**.
-- Faremos o mapeamento da porta padrão do Postgres **5432**.
-- Instalar o **DBeaver** como client para geranciar o banco de dados.
+- Faremos o mapeamento *(Port Bind)* da porta padrão do Postgres **5432**.
+- **Sugestão**: Instalar o **DBeaver** ou algum outro client para geranciar o banco de dados.
 
 
 ```hcl
 
-docker container run -d -p 5432:5432 -e POSTGRES_DB=aula-iniciativa -e POSTGRES_USER=iniciativadevops -e POSTGRES_PASSWORD=1234 postgres
+docker container run -d -p 5432:5432 -e POSTGRES_DB=nome-do-BD -e POSTGRES_USER=admin -e POSTGRES_PASSWORD=1234 postgres
 
 ```
 
