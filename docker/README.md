@@ -1,6 +1,25 @@
 # Docker
 
-To Do
+- Docker é a empresa que criou o Docker Engine.
+- Docker Engine é uma ferramenta para criar e interagir com containers Linux.
+- Conteiners existem a bastante tempo no Linux, o Docker apenas disponibiliza um ferramental para interagir com os conteiners.
+- Embora containers seajam executados em ambientes Windows, Linux e Mac, em ambiente Linux é mais performático, pois containers são naturalmente Linux.
+
+## Conteiner
+
+Trata-se da execução do recurso provisionado a partir de uma imagem.
+
+## Imagem
+
+Trata-se do artefato contendo os componentes necessários para execução de um conteiner.
+
+**Observação**: Sobre imagem e conteiner podemos fazer um paralelo com a orientação a objetos, onde a imagem é a classe e o conteiner é o objeto instanciado a partir da classe, ou seja, um conteiner é lançado a partir de uma imagem.
+
+## Virtualização vs Conteinirização
+
+- **Virtualização**: Tem como base máquinas virtuais sendo que cada uma com um sistema operacional instalado.
+
+- **Conteinirização**: Processos isolados executdos em um sistema operacional.
 
 ## Instalação do Docker
 
@@ -59,7 +78,7 @@ docker container ls -a
 
 ```
 
-- Comando para remover um container em execução pelo nome do container ou nome da imagem:
+- Comando para remover um conteiner em execução pelo nome do container ou nome da imagem:
 
 ```hcl
 
@@ -105,6 +124,8 @@ docker container rm -f $(docker container ls -a q)
 
 Trata-se da execução de um container acessando o seu terminal de forma que seja possível realizar outras operações como em um sistema operacional.
 
+#### Container Ubuntu
+
 - Lançando um container *Ubuntu* acessando seu terminal via bash:
 
 ```hcl
@@ -114,6 +135,40 @@ docker container run -it ubuntu /bin/bash
 ```
 
 Após a execução do container *Ubuntu* no modo interativo, será possível realizar instalações como *apt get update && apt install curl* como sendo um sistema operacional.
+
+```hcl
+
+apt update
+
+install curl
+
+curl https://www.google.com.br
+
+sudo docker container run -it ubuntu /bin/bash
+
+```
+
+O comando "exit" sai do modo interativo do conteiner:
+
+```hcl
+
+exit
+
+```
+
+### Port Bind
+
+Trata-se do recurso que permite associar a porta de um container com a porta da máquina local, permitindo acesso externo ao container.
+
+- Comando para associar a porta 8080 da máquina local com a porta 80 do container NGINX, permitindo acesso via navegador:
+
+```hcl
+
+docker container run -d -p 8080:80 nginx
+
+```
+
+#### Container NGINX
 
 - Lançando um container *nginx* 
 
@@ -129,7 +184,7 @@ Para evitar o travamento do terminal conforme citado acima, será necessário ex
 
 ```hcl
 
-docker container run -d nginx
+docker container run -d -p 8080:80 nginx
 
 ```
 
@@ -143,17 +198,26 @@ docker container exec -it nomedocontainer /bin/bash
 
 Após a execução do container nginx em modo interativo, executando o comando **curl localhost/80** será apresentada o *HTML* da página inicial do NGINX.
 
-### Port Bind
+### Variáveis de Ambiente
 
-Trata-se do recurso que permite associar a porta de um container com a porta da máquina local, permitindo acesso externo ao container.
+Tratam-se de configurações que podem ser definidas e acessados ​​durante a execução de contêineres para configurar aplicativos ou definir comportamentos específicos, como senhas de banco de dados ou informações de configuração.
 
-- Comando para associar a porta 8080 da máquina local com a porta 80 do container NGINX, permitindo acesso via navegador:
+- Essas configurações ficam disponíveis na documentação da imagem no Docker Registry *(Docker Hub, AWS ECR, etc.)**.
+- O argumento para definir variáveis de ambiente é o **-e**.
+
+#### Container Postgres
+
+- Será um container baseado na imagem **postgres**.
+- Faremos o mapeamento da porta padrão do Postgres **5432**.
+- Instalar o **DBeaver** como client para geranciar o banco de dados.
+
 
 ```hcl
 
-docker container run -d -p 8080:80 nginx
+docker container run -d -p 5432:5432 -e POSTGRES_DB=aula-iniciativa -e POSTGRES_USER=iniciativadevops -e POSTGRES_PASSWORD=1234 postgres
 
 ```
+
 ## Contruindo uma Imagem Docker
 
 Processo de contrução de imagens Docker para que posteriormente possam ser lançadas como conteiners.
