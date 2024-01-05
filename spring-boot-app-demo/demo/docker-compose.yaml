@@ -1,0 +1,25 @@
+# Versão da sintaxe do Docker Compose que está sendo usada.
+version: '3'
+
+# Configuração dos serviços Docker.
+services:
+  # Configuração do serviço chamado 'demo'.
+  demo:
+    # Define o nome do contêiner como 'demo'.
+    container_name: demo
+
+    # Configuração da construção da imagem.
+    build:
+      # Define o contexto do build como o diretório atual (onde está localizado o docker-compose.yml).
+      context: .
+
+      # Especifica o arquivo Dockerfile a ser utilizado.
+      dockerfile: Dockerfile
+
+    # Atribui um apelido para referenciar a imagem
+    image: demo:latest
+
+    # Mapeia a porta 8080 do host para a porta 8080 do contêiner.
+    ports:
+      - "8080:8080"
+
