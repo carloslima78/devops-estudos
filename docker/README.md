@@ -233,31 +233,17 @@ Trata-se do arquivo que contém os passos para a contrução de uma imagem Docke
 - Cada comando executado, será uma camada na estrutura da imagem Docker.
 - O container é uma camada superior a imagem que utiliza sua referencia para ser executado.
 
-- Arquivo Dockerfile para contrução de uma imagem de uma aplicação NodeJs:
+- Arquivo Dockerfile para contrução de uma imagem de uma aplicação Java:
 
 ```hcl
+# Define a imagem base a ser usada, neste caso, uma imagem OpenJDK versão 17 slim.
+FROM openjdk:17-jdk-slim
 
-# Especifica a imagem base para a criação da imagem da aplicação.
-FROM node
+# Copia o arquivo JAR construído durante a compilação para o sistema de arquivos do contêiner.
+COPY target/demo-0.0.1-SNAPSHOT.jar demo-0.0.1-SNAPSHOT.jar
 
-# Especifica o diretório na imagem onde serão incluídos os elementos da aplicação.
-WORKDIR /app
-
-# Copia os arquivos necessários do diretório corrente.
-COPY package.json .
-
-# Executa o comando de instalação para baixar todas as dependências necessárias para a imagem.
-RUN npm install
-
-# Copia todos os demais arquivos necessários.
-COPY . .
-
-# Especifica a porta onde a aplicação será executada. 
-EXPOSE 8080
-
-# Comando para executar a aplicação.
-CMD ["node", "server.js"]
-
+# Define o comando que será executado quando o contêiner for iniciado.
+ENTRYPOINT ["java", "-jar", "/demo-0.0.1-SNAPSHOT.jar"]
 ```
 
 ### Instruções do Dockerfile
@@ -337,7 +323,7 @@ Passo a passo para publicar uma imagem no Docker Hub:
 
 ```hcl
 
-docker build -t conversao-temperatura .
+docker build -t demo-app-springboot .
 
 ```
 
@@ -345,7 +331,7 @@ docker build -t conversao-temperatura .
 
 ```hcl
 
-docker tag conversao-temperatura carloslimadocker78/conversao-temperatura:v1
+docker tag conversao-temperatura carloslimadocker78/demo-app-springboot:v1
 
 ```
 
@@ -353,7 +339,7 @@ docker tag conversao-temperatura carloslimadocker78/conversao-temperatura:v1
 
 ```hcl
 
-docker tag conversao-temperatura carloslimadocker78/conversao-temperatura:latest
+docker tag conversao-temperatura carloslimadocker78/demo-app-springboot:latest
 
 ```
 
@@ -369,7 +355,7 @@ docker login
 
 ```hcl
 
-carloslimadocker78/conversao-temperatura:v1
+carloslimadocker78/demo-app-springboot:v1
 
 ```
 
@@ -377,7 +363,7 @@ carloslimadocker78/conversao-temperatura:v1
 
 ```hcl
 
-docker push carloslimadocker78/conversao-temperatura:latest
+docker push carloslimadocker78/demo-app-springboot:latest
 
 ```
 
@@ -385,7 +371,7 @@ docker push carloslimadocker78/conversao-temperatura:latest
 
 ```hcl
 
-docker container run -d -p 8080:8080 carloslimadocker78/conversao-temperatura:v1
+docker container run -d -p 8080:8080 carloslimadocker78/demo-app-springboot:v1
 
 ```
 
