@@ -413,7 +413,7 @@ docker container run -d -p 8080:8080 carloslimadocker78/demospringbootimage:late
 
 Docker Compose permite executar ambientes de aplicativos com vários contêineres com base nas definições definidas em um arquivo YAML.
 
-## Instalação do Docker Compose
+### Instalação do Docker Compose
 
 Passos para instalação do Docker Compose no ambiente Linux Ubuntu:
 
