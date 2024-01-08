@@ -281,18 +281,56 @@ Trata-se do comando Docker para construção de uma imagem Docker baseando-se no
 - Comando para construção de uma imagem Docker:
 
 ```hcl
+docker build -t demospringbootimage .
+```
 
-docker build -t nomedaimagem .
+- Comando para listar as imagens:
 
+```hcl
+docker image ls
+
+REPOSITORY                                 TAG                   IMAGE ID       CREATED         SIZE
+demospringbootimage                        latest                6e34c8ab44aa   8 seconds ago   427MB
 ```
 
 - Comando para executar o container realizando um Port Bind para a porta 8080
 
 ```hcl
-
-docker container run -p 8080:8080 -d nomedocontainer
-
+docker container run -p 8080:8080 -d --name demospringboot demospringbootimage
 ```
+
+- Comando para listar os containers em execução. O container *demospring* deve ser listado:
+
+```hcl
+docker container ps
+
+CONTAINER ID   IMAGE                 COMMAND                  CREATED          STATUS          PORTS                                       NAMES
+980662d029c8   demospringbootimage   "java -jar /demo-0.0…"   22 seconds ago   Up 20 seconds   0.0.0.0:8080->8080/tcp, :::8080->8080/tcp   demospringboot
+```
+
+- Ao requisitar *localhohttp://localhost:8080/hostinfo/* a aplicação será executada no container:
+
+![imagem](imagens/localhost-container-test.png)
+
+
+- Comando para parar o container demospringboot
+
+```hcl
+docker container stop demospringboot
+```
+
+- Comando para remover o container demospringboot
+
+```hcl
+docker container rm demospringboot
+```
+
+- Comando para remover a imagem demospringbootimage
+
+```hcl
+docker container stop demospringboot
+```
+
 ## Docker Registry
 
 Trata-se do repositório de imagens Docker. Seu objetivo é disponibilizar imagens Docker em um ambiente comum e assim otimizar o trabalho de equipes de desenvolvimento permitindo a distribuição dessas imagens. 
@@ -322,57 +360,43 @@ Passo a passo para publicar uma imagem no Docker Hub:
 - Construa a imagem:
 
 ```hcl
-
-docker build -t demo-app-springboot .
-
+docker build -t demospringbootimage .
 ```
 
 - Faça o tageamento da imagem *(Não obrigatório, mas é uma boa prática.)*
 
 ```hcl
-
 docker tag conversao-temperatura carloslimadocker78/demo-app-springboot:v1
-
 ```
 
 - Comando para tagear a imagem *latest* para que seja a última versão no repositório:
 
 ```hcl
-
 docker tag conversao-temperatura carloslimadocker78/demo-app-springboot:latest
-
 ```
 
 - Login na conta do Docker Hub *(Entrar com Username e Password da conta)*
 
 ```hcl
-
 docker login
-
 ```
 
 - Comando para publicar a imagem com a tag v1:
 
 ```hcl
-
 carloslimadocker78/demo-app-springboot:v1
-
 ```
 
 - Comando para publicar a imagem com a tag latest:
 
 ```hcl
-
 docker push carloslimadocker78/demo-app-springboot:latest
-
 ```
 
 - Execute o container basedo na imagem publicada no Docker Hub:
 
 ```hcl
-
 docker container run -d -p 8080:8080 carloslimadocker78/demo-app-springboot:v1
-
 ```
 
 ## Docker Compose

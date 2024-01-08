@@ -158,6 +158,48 @@ OS name: "linux", version: "6.2.0-39-generic", arch: "amd64", family: "unix"
 fonte: (https://keepgrowing.in/java/how-to-fix-error-executing-maven-issue-after-updating-to-java-17/)
 
 
+## Gerando o arquivo executável .Jar
+
+1. Compilar o projeto. :
+
+```hcl
+mvn compile
+```
+
+Este comando compila o código-fonte do projeto, gerando os arquivos compilados na pasta target.
+
+2. Executa os testes no projeto.
+
+```hcl
+mvn test
+```
+
+3. Gera o arquivo JAR do projeto na pasta target, que pode ser executado ou distribuído.
+
+```hcl
+mvn package
+```
+Este comando compila o código-fonte, executa testes, gera o artefato (por exemplo, um JAR) e o coloca no diretório target.
+
+No entanto, o artefato gerado não é instalado no repositório local do Maven. Isso significa que não está disponível para outros projetos Maven no mesmo ambiente.
+
+```hcl
+mvn clean install
+```
+
+Este comando realiza uma limpeza do projeto removendo os artefatos compilados e constrói o projeto do zero.
+
+O objetivo install não apenas gera o artefato (geralmente um JAR) como o comando package, mas também o instala no repositório local do Maven, tornando-o disponível para outros projetos no mesmo ambiente de desenvolvimento.
+
+4. Executa a aplicação iniciando-a a partir do arquivo JAR gerado nos passos anteriores.
+
+```hcl
+java -jar target/seu-arquivo.jar
+```
+5. Interromper a execução da aplicação.
+
+**Ctrl + C (Interromper no Terminal)**: No terminal onde a aplicação foi iniciada, pressionar Ctrl + C interromperá a execução da aplicação.
+
 ## Dica: Como encerrar um processo em execução escutando uma porta específica no Linux
 
 Os comandos abaixo são usados para identificar e encerrar processos que estão utilizando a determinadas portas no Linux.
@@ -179,3 +221,13 @@ kill $(lsof -t -i:8080)
 ```hcl
 kill -9 $(lsof -t -i:8080)
 ```
+
+## Conclusão
+
+Após a conclusão bem-sucedida dos passos utilizando o Maven, a aplicação Java encontra-se pronta para ser implementada em ambientes de contêineres, como Docker e Kubernetes. 
+
+O processo de construção do JAR através do Maven proporciona uma artefato independente que encapsula a aplicação e suas dependências. 
+
+Esse JAR pode ser facilmente incorporado em uma imagem Docker, facilitando a criação de contêineres isolados e portáteis. Ao empacotar a aplicação dessa maneira, torna-se simples a implantação e escalabilidade em clusters orquestrados por Kubernetes, onde imagens contendo o JAR podem ser gerenciadas eficientemente. 
+
+A abordagem centrada em contêineres proporciona uma solução ágil e consistente para a distribuição e execução da aplicação em ambientes DevOps modernos.
