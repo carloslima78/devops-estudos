@@ -437,6 +437,10 @@ docker-compose -version
 docker-compose version 1.29.2, build 5becea4c
 ```
 
+### Contruindo uma Imagem Docker e Iniciando um Container
+
+Processo de contrução da imagem Docker e execução do container, será por meio do arquivo docker-compose.A definição da imagem será baseada no arquivo Dockerfile.
+
 O arquivo docker-compose.yml abaixo define um serviço chamado demdemospringboot. 
 
 O contêiner para esse serviço será chamado demospringboot e será construído a partir do arquivo Dockerfile localizado no diretório atual. 
