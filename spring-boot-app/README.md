@@ -23,7 +23,7 @@ A aplicação retorna informações sobre a máquina de execução da aplicaçã
 
 ## Pré Requisitos
 
-1. Certifique-se da compatibilidade de seu ambiente, neste cenário trata-se do **Ubuntu 20.04**.
+Neste cenário estamos utilizando o **Ubuntu 20.04**.
 
 - Comando para verificar a versão do Ubuntu:
 
@@ -36,6 +36,10 @@ Description:	Ubuntu 22.04.3 LTS
 Release:	22.04
 Codename:	jammy
 ```
+
+1. Embora seja óbvio, vale ressaltar que será necessária uma IDE de desenvolvimento, neste caso foi utilizado o **InteliJJ Community Edition**, mas temos outras boas IDEs como o Spring Tool Suite e o Eclipse.
+
+![imagem](imagens/Intelijj.png)
 
 2. Garanta que o Java JDK está instalado e a versão é compatível com o projeto que está iniciando, neste cenário trata-se do **Java 17**.
 
@@ -158,7 +162,7 @@ fonte: (https://keepgrowing.in/java/how-to-fix-error-executing-maven-issue-after
 
 Os comandos abaixo são usados para identificar e encerrar processos que estão utilizando a determinadas portas no Linux.
 
-- Comando para listar qualquer processo escutando a *porta 8080 (Poderia ser outra porta)* por exemplo. Este comando utiliza o utilitário **lsof*** para listar processos que estão utilizando a porta 8080.
+- Comando para listar qualquer processo escutando a *porta 8080 (Poderia ser outra porta)* por exemplo. Este comando utiliza o utilitário **lsof** para listar processos que estão utilizando a porta 8080.
 
 ```hcl
 lsof -i:8080
