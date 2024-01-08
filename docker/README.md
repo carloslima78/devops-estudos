@@ -308,7 +308,7 @@ CONTAINER ID   IMAGE                 COMMAND                  CREATED          S
 980662d029c8   demospringbootimage   "java -jar /demo-0.0…"   22 seconds ago   Up 20 seconds   0.0.0.0:8080->8080/tcp, :::8080->8080/tcp   demospringboot
 ```
 
-- Ao requisitar *localhohttp://localhost:8080/hostinfo/* a aplicação será executada no container:
+- Ao requisitar *http://localhost:8080/hostinfo/* a aplicação será executada no container:
 
 ![imagem](imagens/localhost-container-test.png)
 
@@ -366,13 +366,13 @@ docker build -t demospringbootimage .
 - Faça o tageamento da imagem *(Não obrigatório, mas é uma boa prática.)*
 
 ```hcl
-docker tag conversao-temperatura carloslimadocker78/demo-app-springboot:v1
+docker tag demospringbootimage carloslimadocker78/demospringbootimage:v1
 ```
 
 - Comando para tagear a imagem *latest* para que seja a última versão no repositório:
 
 ```hcl
-docker tag conversao-temperatura carloslimadocker78/demo-app-springboot:latest
+docker tag demospringbootimage carloslimadocker78/demospringbootimage:latest
 ```
 
 - Login na conta do Docker Hub *(Entrar com Username e Password da conta)*
@@ -384,19 +384,19 @@ docker login
 - Comando para publicar a imagem com a tag v1:
 
 ```hcl
-carloslimadocker78/demo-app-springboot:v1
+carloslimadocker78/demospringbootimage:v1
 ```
 
 - Comando para publicar a imagem com a tag latest:
 
 ```hcl
-docker push carloslimadocker78/demo-app-springboot:latest
+docker push carloslimadocker78/demospringbootimage:latest
 ```
 
 - Execute o container basedo na imagem publicada no Docker Hub:
 
 ```hcl
-docker container run -d -p 8080:8080 carloslimadocker78/demo-app-springboot:v1
+docker container run -d -p 8080:8080 carloslimadocker78/demospringbootimage:v1
 ```
 
 ## Docker Compose
