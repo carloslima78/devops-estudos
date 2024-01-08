@@ -310,6 +310,7 @@ CONTAINER ID   IMAGE                 COMMAND                  CREATED          S
 
 - Ao requisitar *http://localhost:8080/hostinfo/* a aplicação será executada no container:
 
+
 ![imagem](imagens/localhost-container-test.png)
 
 
@@ -419,107 +420,120 @@ Passos para instalação do Docker Compose no ambiente Linux Ubuntu:
 - Comando para donwload do executável em **/usr/local/bin/docker-compose**, tornando-o acessível de forma global na máquina local como **docker-compose**:
 
 ```hcl
-
 sudo curl -L "https://github.com/docker/compose/releases/download/1.29.2/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
-
 ```
 
 - Comando para definir as permissões para que o **docker-compose** seja executável:
 
 ```hcl
-
 sudo chmod +x /usr/local/bin/docker-compose
-
 ```
 
 - Comando para verificar se a instalação do **docker-compose** foi bem sucedida:
 
 ```hcl
-
-docker-compose --version
-
-```
-
-- Saída (Output) esperada:
-
-```hcl
+docker-compose -version
 
 docker-compose version 1.29.2, build 5becea4c
-
 ```
+
+O arquivo docker-compose.yml abaixo define um serviço chamado demdemospringboot. 
+
+O contêiner para esse serviço será chamado demospringboot e será construído a partir do arquivo Dockerfile localizado no diretório atual. 
+
+A imagem resultante terá o apelido demospringbootimage:latest. A porta 8080 do host será mapeada para a porta 8080 do contêiner.
+
+Em resumo, este arquivo docker-compose define um serviço que irá executar um contêiner que pode ser acessado na porta 8080 do host.
+
+Aqui está uma explicação mais detalhada de cada linha do arquivo:
+
+- services: Esta linha define a seção services do arquivo docker-compose.yml. Esta seção contém a definição dos serviços que serão criados.
+
+- demospringboot: Esta linha define um serviço chamado demospringboot.
+
+- container_name: demospringboot: Esta linha define o nome do contêiner para o serviço demospringboot.
+
+- build: Esta linha define a configuração da construção da imagem para o serviço demospringboot.
+
+- context: .: Esta linha define o contexto do build como o diretório atual.
+
+- dockerfile: Dockerfile: Esta linha especifica o arquivo Dockerfile a ser utilizado para construir a imagem.
+
+- image: demospringbootimage:latest: Esta linha atribui um apelido para a imagem resultante do build.
+
+- ports: Esta linha mapeia as portas do host para as portas do contêiner. No caso deste exemplo, a porta 8080 do host é mapeada para a porta 8080 do contêiner.
+
+
+```hcl
+# Versão da sintaxe do Docker Compose que está sendo usada.
+version: '3'
+
+# Configuração dos serviços Docker.
+services:
+  # Configuração do serviço chamado 'demospringboot'.
+  demospringboot:
+    # Define o nome do contêiner como 'demospringboot'.
+    container_name: demospringboot
+
+    # Configuração da construção da imagem.
+    build:
+      # Define o contexto do build como o diretório atual (onde está localizado o docker-compose.yml).
+      context: .
+
+      # Especifica o arquivo Dockerfile a ser utilizado.
+      dockerfile: Dockerfile
+
+    # Atribui um apelido para referenciar a imagem
+    image: demospringbootimage:latest
+
+    # Mapeia a porta 8080 do host para a porta 8080 do contêiner.
+    ports:
+      - "8080:8080"
+```
+
+O comando para gerar a imagem e subir o container via compose é:
+
+```hcl
+docker-compose up
+```
+
+Este comando executará os seguintes passos:
+
+1. Construir as imagens dos serviços definidos no arquivo docker-compose.yml.
+
+2. Iniciar os contêineres para os serviços definidos no arquivo docker-compose.yml.
+
+O comando docker-compose up irá gerar a imagem demospringbootimage:latest e iniciar o contêiner demospringboot. O contêiner demospringboot estará acessível na porta 8080 do host.
+
+Para gerar apenas a imagem, você pode usar o seguinte comando:
+
+```hcl
+docker-compose build
+```
+
+Este comando irá construir as imagens dos serviços definidos no arquivo docker-compose.yml, mas não  iniciará os contêineres.
+
+Para iniciar apenas os contêineres, pode-se usar o seguinte comando:
+
+```hcl
+docker-compose up -d
+```
+
+Este comando iniciará os contêineres para os serviços definidos no arquivo docker-compose.yml, mas não construirá as imagens.
+
+
+## Dockerfile vs Docker Compose
+
+Dockerfile e Docker Compose são duas ferramentas importantes para o desenvolvimento e implantação de aplicações Docker.
+
+**Dockerfile** é um arquivo de texto que descreve como construir uma imagem Docker. Uma imagem Docker é um pacote de software que contém tudo o que é necessário para executar uma aplicação em um contêiner Docker.
+
+Usado para construir imagens Docker, enquanto Docker Compose é usado para executar aplicações Docker.
 
 O arquivo Docker Compose abaixo provisiona um container para o servidor Redis e outro para o Redis Insight:
 
-- Comando para criar o arquivo *redis-docker-compose.yml*:
+**Docker Compose** é uma ferramenta que permite definir e executar aplicações multi-contêiner. Uma aplicação multi-contêiner é uma aplicação que é composta de vários contêineres que trabalham juntos.
 
-```hcl
+Dockerfile é um arquivo de texto simples, enquanto Docker Compose é um arquivo YAML mais complexo.
 
-touch redis-docker-compose.yml
 
-```
-
-- Configure os componentes conforme abaixo:
-
-```hcl
-
-version: "3.3"
-services:
-  redis:
-    image: redis:6.0.7
-    container_name: redis
-    restart: always
-    volumes:
-      - redis_volume_data:/data
-    ports:
-      - 6379:6379
-  redis_insight:
-    image: redislabs/redisinsight:latest
-    container_name: redis_insight
-    restart: always
-    ports:
-      - 8001:8001
-    volumes:
-      - redis_insight_volume_data:/db
-volumes:
-  redis_volume_data:
-  redis_insight_volume_data:
-
-```
-
-- O Redis será exposto na porta 6379 e os dados serão armazenados em no volume redis_volume_data.
-- O RedisInsight será exposto na porta 8001 e os dados serão armazenados no volume redis_insight_volume_data.
-
-## Iniciando os Recursos
-
-- Comando para inciar os serviços em primeiro plano:
-
-```hcl
-
-docker-compose -f redis-docker-compose.yml up
-
-```
-
-- Comando para inciar os serviços em segundo plano:
-
-```hcl
-
-docker-compose -f redis-docker-compose.yml up -d
-
-```
-
-## Acessando a Interface do RedisInsight
-
-```hcl
-
-curl http://localhost:8001/
-
-```
-
-## Adicionando um Banco de Dados
-
-1. Pressione **ADD REDIS DATABASE**.
-2. Dê um nome para o banco de dados.
-3. Preencha o endereço IP da máquina o Redis foi instalado, neste caso localhost.
-4. Preencha a porta como 6379.
-
-**Referência:** (http://selftuts.in/install-redis-using-docker-compose/)
