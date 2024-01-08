@@ -80,7 +80,7 @@ OpenJDK 64-Bit Server VM (build 17.0.9+9-Ubuntu-122.04, mixed mode, sharing)
 ![imagem](imagens/pomxml.png)
 
 
-Configurações de debug da aplicação.
+- Configurações de debug da aplicação.
 
 ![imagem](imagens/debug-configurations.png)
 
@@ -152,3 +152,26 @@ OS name: "linux", version: "6.2.0-39-generic", arch: "amd64", family: "unix"
 ```
 
 fonte: (https://keepgrowing.in/java/how-to-fix-error-executing-maven-issue-after-updating-to-java-17/)
+
+
+## Dica: Como encerrar um processo em execução escutando uma porta específica no Linux
+
+Os comandos abaixo são usados para identificar e encerrar processos que estão utilizando a determinadas portas no Linux.
+
+- Comando para listar qualquer processo escutando a porta 8080 por exemplo. Este comando utiliza o utilitário lsof para listar processos que estão utilizando a porta 8080.
+
+```hcl
+lsof -i:8080
+```
+
+- Comando para encerrar qualquer processo que esteja escutando a porta 8080. Este comando encerra o processo que está escutando a porta 8080 utilizando o PID obtido pelo comando lsof.
+
+```hcl
+kill $(lsof -t -i:8080)
+```
+
+Ou mais violentamente. Este comando encerra o processo de forma mais abrupta (-9 força o encerramento) na porta 8080, útil quando o método padrão não funciona.
+
+```hcl
+kill -9 $(lsof -t -i:8080)
+```
