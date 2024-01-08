@@ -23,9 +23,9 @@ A aplicação retorna informações sobre a máquina de execução da aplicaçã
 
 ## Pré Requisitos
 
-1. Certifique-se da compatibilidade se seu ambiente, neste cenário trata-se do **Ubuntu 20.04**.
+1. Certifique-se da compatibilidade de seu ambiente, neste cenário trata-se do **Ubuntu 20.04**.
 
-Comando para verificar a versão do Ubuntu:
+- Comando para verificar a versão do Ubuntu:
 
 ```hcl
 lsb_release -a
@@ -37,9 +37,9 @@ Release:	22.04
 Codename:	jammy
 ```
 
-2. Garanta que o JDK está instalado e é compatível com o projeto que está iniciando, neste cenário trata-se do **Java 17**.
+2. Garanta que o Java JDK está instalado e a versão é compatível com o projeto que está iniciando, neste cenário trata-se do **Java 17**.
 
-Comando para verificar a versão do Java instalado.
+- Comando para verificar a versão do Java instalado.
 
 ```hcl
 java --version
@@ -50,8 +50,32 @@ OpenJDK 64-Bit Server VM (build 17.0.9+9-Ubuntu-122.04, mixed mode, sharing)
 
 ```
 
+- Comandos para caso tenha uma versão anterior a 17 do Java ou não tenha o Java instalado.
 
-Arquivo **pom.xml** tageando a versão 17 do Java.
+```hcl
+sudo apt update
+```
+
+```hcl
+sudo apt install -y openjdk-17-jdk
+```
+
+```hcl
+java --version
+
+openjdk 17.0.9 2023-10-17
+OpenJDK Runtime Environment (build 17.0.9+9-Ubuntu-122.04)
+OpenJDK 64-Bit Server VM (build 17.0.9+9-Ubuntu-122.04, mixed mode, sharing)
+
+```
+
+- Arquivo **pom.xml** tageando a versão 17 do Java.
+
+```hcl
+	<properties>
+		<java.version>17</java.version>
+	</properties>
+```
 
 ![imagem](imagens/pomxml.png)
 
@@ -61,6 +85,70 @@ Configurações de debug da aplicação.
 ![imagem](imagens/debug-configurations.png)
 
 
-Estrutura do projeto.
+- Estrutura do projeto.
 
 ![imagem](imagens/debug-configurations.png)
+
+
+3. Garanta que o **Maven** esteja instalado e apontando para a versão correta do Java, neste caso o 17.
+
+- Comando para verificar a versão do Maven. Neste caso, nota-se que o Maven está apontando para a versão correta do Java, a 17, conforme a linha *Java version: 17.0.9, vendor: Private Build, runtime: /usr/lib/jvm/java-17-openjdk-amd64*. 
+
+**Caso o Maven não estivesse apontando para a versão correta do Java, seria necessário editar a variável de ambiente**.
+
+```hcl
+mvn -version
+
+Apache Maven 3.9.6 (bc0240f3c744dd6b6ec2920b3cd08dcc295161ae)
+Maven home: /opt/apache-maven-3.9.6
+Java version: 17.0.9, vendor: Private Build, runtime: /usr/lib/jvm/java-17-openjdk-amd64
+Default locale: pt_BR, platform encoding: UTF-8
+OS name: "linux", version: "6.2.0-39-generic", arch: "amd64", family: "unix"
+```
+
+- Comando para imprimir o valor da variável de ambiente **JAVA_HOME". Neste caso, nota-se que está coma versão correta do Java, a 17.
+
+```hcl
+echo $JAVA_HOME
+```
+
+- Caso precise atualizar a versão do Maven, remova a versão anterior com o comando abaixo. Isso excluirá a configuração do Maven, os arquivos de dados e suas dependências
+
+```hcl
+sudo apt autoremove --purge maven
+```
+
+- Encontrar a versão mais recente – ela está disponível na página Downloading Apache Maven (https://maven.apache.org/download.cgi).
+
+
+- Download dos binários no arquivo baixado **tar.gz** o seguinte comando:
+
+```hcl
+wget https://dlcdn.apache.org/maven/maven-3/3.8.4/binaries/apache-maven-3.8.4-bin.tar.gz
+```
+
+- Extraindo os arquivos para a pasta **/opt**.
+
+```hcl
+tar xf apache-maven-3.8.4-bin.tar.gz -C /opt
+```
+
+Abaixo está uma breve descrição das opções usadas com o comando tar :
+
+x: extraia o arquivo fornecido de um arquivo (modo de operação);
+f: use arquivo compactado (seleção de dispositivo);
+C /opt: mova para o diretório /opt antes de realizar qualquer operação (seleção de arquivo local).
+
+- Verifique a versão do Maven.
+
+```hcl
+mvn -version
+
+Apache Maven 3.9.6 (bc0240f3c744dd6b6ec2920b3cd08dcc295161ae)
+Maven home: /opt/apache-maven-3.9.6
+Java version: 17.0.9, vendor: Private Build, runtime: /usr/lib/jvm/java-17-openjdk-amd64
+Default locale: pt_BR, platform encoding: UTF-8
+OS name: "linux", version: "6.2.0-39-generic", arch: "amd64", family: "unix"
+```
+
+fonte: (https://keepgrowing.in/java/how-to-fix-error-executing-maven-issue-after-updating-to-java-17/)
