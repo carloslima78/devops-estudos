@@ -6,7 +6,11 @@ Docker Engine trata-se de uma ferramenta para criar e interagir com containers L
 - Conteiners existem a bastante tempo no Linux, o Docker apenas disponibiliza um ferramental para interagir com os conteiners.
 - Embora containers seajam executados em ambientes Windows, Linux e Mac, em ambiente Linux é mais performático, pois containers são naturalmente Linux.
 
-**Importante**: As abordagens pŕaticas utilizaram a aplicação de demonstração em *Spring Boot* presente neste repositório (https://github.com/carloslima78/devops-trilhas/tree/main/spring-boot-app)
+## Sobre o Mão na Massa ...
+
+As abordagens pŕaticas a seguir, utilizarão os itens presentes na estrutura da aplicação de demonstração em *Spring Boot* presente neste repositório (https://github.com/carloslima78/devops-trilhas/tree/main/spring-boot-app) como aplicação, Maven, imagem Docker, arquivos Dockerfile e Docker Compose, etc.
+
+Na documentação do repositório são explicados os pré requisitos para uma aplicação Java Spring Boot ser executada a partir de imagens Docker.
 
 ## Conteiner
 
