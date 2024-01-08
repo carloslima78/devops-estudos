@@ -37,7 +37,7 @@ Release:	22.04
 Codename:	jammy
 ```
 
-1. Embora seja óbvio, vale ressaltar que será necessária uma IDE de desenvolvimento, neste caso foi utilizado o **InteliJJ Community Edition**, mas temos outras boas IDEs como o Spring Tool Suite e o Eclipse.
+1. Embora seja página virada para muitos, vale ressaltar que será necessária uma IDE de desenvolvimento, neste caso foi utilizado o **InteliJJ Community Edition**, mas temos outras boas IDEs como o Spring Tool Suite, o Eclipse, VS Code, etc.
 
 ![imagem](imagens/InteliJJ.png)
 
