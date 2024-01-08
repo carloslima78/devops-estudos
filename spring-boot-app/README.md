@@ -23,7 +23,7 @@ A aplicação retorna informações sobre a máquina de execução da aplicaçã
 
 ## Pré Requisitos
 
-Neste cenário estamos utilizando o **Ubuntu 20.04**.
+Neste cenário estamos utilizando o sistema operacional **Ubuntu 20.04**.
 
 - Comando para verificar a versão do Ubuntu:
 
@@ -39,7 +39,7 @@ Codename:	jammy
 
 1. Embora seja óbvio, vale ressaltar que será necessária uma IDE de desenvolvimento, neste caso foi utilizado o **InteliJJ Community Edition**, mas temos outras boas IDEs como o Spring Tool Suite e o Eclipse.
 
-![imagem](imagens/Intelijj.png)
+![imagem](imagens/InteliJJ.png)
 
 2. Garanta que o Java JDK está instalado e a versão é compatível com o projeto que está iniciando, neste cenário trata-se do **Java 17**.
 
