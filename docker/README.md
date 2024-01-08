@@ -6,6 +6,8 @@ Docker Engine trata-se de uma ferramenta para criar e interagir com containers L
 - Conteiners existem a bastante tempo no Linux, o Docker apenas disponibiliza um ferramental para interagir com os conteiners.
 - Embora containers seajam executados em ambientes Windows, Linux e Mac, em ambiente Linux é mais performático, pois containers são naturalmente Linux.
 
+**Importante**: As abordagens pŕaticas utilizaram a aplicação de demonstração em *Spring Boot* presente neste repositório (https://github.com/carloslima78/devops-trilhas/tree/main/spring-boot-app)
+
 ## Conteiner
 
 Trata-se da execução do recurso provisionado a partir de uma imagem.
@@ -332,83 +334,6 @@ docker container rm demospringboot
 docker container stop demospringboot
 ```
 
-## Docker Registry
-
-Trata-se do repositório de imagens Docker. Seu objetivo é disponibilizar imagens Docker em um ambiente comum e assim otimizar o trabalho de equipes de desenvolvimento permitindo a distribuição dessas imagens. 
-
-Existem diversas opções de Registry no mercado:
-
-- Docker Hub.
-- AWS Elastic Container Registry.
-- Azure Container Registry.
-- Google Container Registry.
-
-### Docker Hub
-
-É o principal repositório de imagens Docker do mercado (hub.docker.com). Permite a publicação de repositórios públicos e privados.
-
-### Convenção de Nomes para Imagens
-
-Para publicação de imagens *não oficiais* no Docker Hub, é necessário seguir uma nomencaltura de nomes:
-
-**Exemplo:** *namespace/repositorio:tag* -> *carloslimadocker78/nome-da-imagem:v1*
-**Observações:** 
-- O namespace nada mais é que o nome da sua conta no Docker Hub.
-- Imagens oficiais não usam Namespace, ex: *ubuntu:22.04*
-
-Passo a passo para publicar uma imagem no Docker Hub:
-
-- Construa a imagem:
-
-```hcl
-docker build -t demospringbootimage .
-```
-
-- Faça o tageamento da imagem *(Não obrigatório, mas é uma boa prática.)*
-
-```hcl
-docker tag demospringbootimage carloslimadocker78/demospringbootimage:v1
-```
-
-- Comando para tagear a imagem *latest* para que seja a última versão no repositório:
-
-```hcl
-docker tag demospringbootimage carloslimadocker78/demospringbootimage:latest
-```
-
-- Login na conta do Docker Hub *(Entrar com Username e Password da conta)*
-
-```hcl
-docker login
-```
-
-- Comando para publicar a imagem com a tag v1:
-
-```hcl
-docker push carloslimadocker78/demospringbootimage:v1
-```
-
-- Comando para publicar a imagem com a tag latest:
-
-```hcl
-docker push carloslimadocker78/demospringbootimage:latest
-```
-
-- A imagem estará publicada no DockerHub e disponível para execução de containeres.
-
-![imagem](imagens/dockerhub.png)
-
-- Execute o container basedo na imagem publicada no Docker Hub:
-
-```hcl
-docker container run -d -p 8080:8080 carloslimadocker78/demospringbootimage:latest
-```
-
-- Ao requisitar *http://localhost:8080/hostinfo/* a aplicação será executada no container a partir da imagem criada no DockerHub:
-
-![imagem](imagens/localhost-container-test.png)
-
-
 ## Docker Compose
 
 Docker Compose permite executar ambientes de aplicativos com vários contêineres com base nas definições definidas em um arquivo YAML.
@@ -439,7 +364,7 @@ docker-compose version 1.29.2, build 5becea4c
 
 ### Contruindo uma Imagem Docker e Iniciando um Container
 
-Processo de contrução da imagem Docker e execução do container, será por meio do arquivo docker-compose.A definição da imagem será baseada no arquivo Dockerfile.
+O processo de contrução da imagem Docker e execução do container, será por meio do arquivo docker-compose. A definição da imagem será baseada no arquivo Dockerfile.
 
 O arquivo docker-compose.yml abaixo define um serviço chamado demdemospringboot. 
 
@@ -451,21 +376,21 @@ Em resumo, este arquivo docker-compose define um serviço que irá executar um c
 
 Aqui está uma explicação mais detalhada de cada linha do arquivo:
 
-- services: Esta linha define a seção services do arquivo docker-compose.yml. Esta seção contém a definição dos serviços que serão criados.
+- **services**: Esta linha define a seção services do arquivo docker-compose.yml. Esta seção contém a definição dos serviços que serão criados.
 
-- demospringboot: Esta linha define um serviço chamado demospringboot.
+- **demospringboot**: Esta linha define um serviço chamado demospringboot.
 
-- container_name: demospringboot: Esta linha define o nome do contêiner para o serviço demospringboot.
+- **container_name**: demospringboot: Esta linha define o nome do contêiner para o serviço demospringboot.
 
-- build: Esta linha define a configuração da construção da imagem para o serviço demospringboot.
+- **build**: Esta linha define a configuração da construção da imagem para o serviço demospringboot.
 
-- context: .: Esta linha define o contexto do build como o diretório atual.
+- **context**: Esta linha define o contexto do build como o diretório atual.
 
-- dockerfile: Dockerfile: Esta linha especifica o arquivo Dockerfile a ser utilizado para construir a imagem.
+- **dockerfile**: Dockerfile: Esta linha especifica o arquivo Dockerfile a ser utilizado para construir a imagem.
 
-- image: demospringbootimage:latest: Esta linha atribui um apelido para a imagem resultante do build.
+- **image**: demospringbootimage:latest: Esta linha atribui um apelido para a imagem resultante do build.
 
-- ports: Esta linha mapeia as portas do host para as portas do contêiner. No caso deste exemplo, a porta 8080 do host é mapeada para a porta 8080 do contêiner.
+- **ports**: Esta linha mapeia as portas do host para as portas do contêiner. No caso deste exemplo, a porta 8080 do host é mapeada para a porta 8080 do contêiner.
 
 
 ```hcl
@@ -541,3 +466,78 @@ O arquivo Docker Compose abaixo provisiona um container para o servidor Redis e 
 Dockerfile é um arquivo de texto simples, enquanto Docker Compose é um arquivo YAML mais complexo.
 
 
+## Docker Registry
+
+Trata-se do repositório de imagens Docker. Seu objetivo é disponibilizar imagens Docker em um ambiente comum e assim otimizar o trabalho de equipes de desenvolvimento permitindo a distribuição dessas imagens. 
+
+Existem diversas opções de Registry no mercado:
+
+- Docker Hub.
+- AWS Elastic Container Registry.
+- Azure Container Registry.
+- Google Container Registry.
+
+### Docker Hub
+
+É o principal repositório de imagens Docker do mercado (hub.docker.com). Permite a publicação de repositórios públicos e privados.
+
+### Convenção de Nomes para Imagens
+
+Para publicação de imagens *não oficiais* no Docker Hub, é necessário seguir uma nomencaltura de nomes:
+
+**Exemplo:** *namespace/repositorio:tag* -> *carloslimadocker78/nome-da-imagem:v1*
+**Observações:** 
+- O namespace nada mais é que o nome da sua conta no Docker Hub.
+- Imagens oficiais não usam Namespace, ex: *ubuntu:22.04*
+
+Passo a passo para publicar uma imagem no Docker Hub:
+
+- Construa a imagem:
+
+```hcl
+docker build -t demospringbootimage .
+```
+
+- Faça o tageamento da imagem *(Não obrigatório, mas é uma boa prática.)*
+
+```hcl
+docker tag demospringbootimage carloslimadocker78/demospringbootimage:v1
+```
+
+- Comando para tagear a imagem *latest* para que seja a última versão no repositório:
+
+```hcl
+docker tag demospringbootimage carloslimadocker78/demospringbootimage:latest
+```
+
+- Login na conta do Docker Hub *(Entrar com Username e Password da conta)*
+
+```hcl
+docker login
+```
+
+- Comando para publicar a imagem com a tag v1:
+
+```hcl
+docker push carloslimadocker78/demospringbootimage:v1
+```
+
+- Comando para publicar a imagem com a tag latest:
+
+```hcl
+docker push carloslimadocker78/demospringbootimage:latest
+```
+
+- A imagem estará publicada no DockerHub e disponível para execução de containeres.
+
+![imagem](imagens/dockerhub.png)
+
+- Execute o container basedo na imagem publicada no Docker Hub:
+
+```hcl
+docker container run -d --name  demospringboot -p 8080:8080 carloslimadocker78/demospringbootimage:latest
+```
+
+- Ao requisitar *http://localhost:8080/hostinfo/* a aplicação será executada no container a partir da imagem criada no DockerHub:
+
+![imagem](imagens/localhost-container-test.png)
