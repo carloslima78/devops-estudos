@@ -5,7 +5,7 @@ Esta aplicação foi desenvolvida com o objetivo de fornecer um ambiente de test
 
 O código fonte está escrito em **Java**, e a aplicação foi projetada para ser facilmente implantada e escalada em ambientes de contêiner.
 
-## Descrição
+## Escopo da Aplicação
 
 Trata-se de um exemplo de um controlador REST API com **Spring Boot**, que a princípio expõe informações sobre o host em que a aplicação está sendo executada. Aqui estão alguns pontos-chave:
 
@@ -23,6 +23,8 @@ A aplicação retorna informações sobre a máquina de execução da aplicaçã
 
 ## Pré Requisitos
 
+### Sistema Operacional
+
 Neste cenário estamos utilizando o sistema operacional **Ubuntu 20.04**.
 
 - Comando para verificar a versão do Ubuntu:
@@ -37,13 +39,13 @@ Release:	22.04
 Codename:	jammy
 ```
 
-## IDE de Desenvolvimento
+### IDE de Desenvolvimento
 
 Embora seja página virada para muitos, vale ressaltar que será necessária uma IDE de desenvolvimento, neste caso foi utilizado o **InteliJJ Community Edition**, mas temos outras boas opções como o Spring Tool Suite, o Eclipse, VS Code, etc.
 
 ![imagem](imagens/InteliJJ.png)
 
-## Java JDK
+### Java JDK
 
 Garanta que o Java JDK está instalado e a versão é compatível com o projeto que está iniciando, neste cenário trata-se do **Java 17**.
 
@@ -97,7 +99,7 @@ OpenJDK 64-Bit Server VM (build 17.0.9+9-Ubuntu-122.04, mixed mode, sharing)
 ![imagem](imagens/debug-configurations.png)
 
 
-## Maven
+### Maven
 
 Garanta que o gerenciador de pacotes **Maven** esteja instalado e apontando para a versão correta do Java, neste caso o 17.
 
@@ -165,27 +167,25 @@ OS name: "linux", version: "6.2.0-39-generic", arch: "amd64", family: "unix"
 fonte: (https://keepgrowing.in/java/how-to-fix-error-executing-maven-issue-after-updating-to-java-17/)
 
 
-### Gerando o arquivo executável .Jar
+#### Gerando o arquivo executável .Jar
 
 Dentro da pasta do projeto, executar os comandos abaixo:
 
 ![imagem](imagens/mvn.png)
 
-1. Compile o projeto:
+1. O comando abaixo compilará o código-fonte do projeto, gerando os arquivos compilados na pasta target.
 
 ```hcl
 mvn compile
 ```
 
-Este comando compila o código-fonte do projeto, gerando os arquivos compilados na pasta target.
-
-2. Execute os testes no projeto.
+2. O comando abaixo executará os testes no projeto.
 
 ```hcl
 mvn test
 ```
 
-3. Gere o arquivo JAR do projeto na pasta target, que pode ser executado ou distribuído.
+3. Gerando o arquivo .JAR do projeto na pasta target, que pode ser executado ou distribuído.
 
 ```hcl
 mvn package
@@ -204,11 +204,11 @@ O objetivo install não apenas gera o artefato (geralmente um JAR) como o comand
 
 Conforme a imagem abaixo, após a executção do comando mvn clean install, espera-se que tenha criado a pasta *target* onde estará o arquivo .JAR executável:
 
-![imagem](imagens/![imagem](imagens/mvn.png).png)
+![imagem](imagens/mvncleaninstall.png)
 
 O arquivo executável **demo-0.0.1-SNAPSHOT.jar** foi criado com sucesso. 
 
-![imagem](imagens/![imagem](imagens/jar.png).png)
+![imagem](imagens/jar.png)
 
 
 4. Opcionalmente, execute a aplicação iniciando-a a partir do arquivo JAR gerado nos passos anteriores.
@@ -217,11 +217,11 @@ O arquivo executável **demo-0.0.1-SNAPSHOT.jar** foi criado com sucesso.
 java -jar target/seu-arquivo.jar
 ```
 
-5. Interromper a execução da aplicação.
+5. Interrompendo a execução da aplicação.
 
 **Ctrl + C (Interromper no Terminal)**: No terminal onde a aplicação foi iniciada, pressionar Ctrl + C interromperá a execução da aplicação.
 
-## Dica: Como encerrar um processo em execução escutando uma porta específica no Linux
+## Como encerrar um processo em execução escutando uma porta específica no Linux
 
 Os comandos abaixo são usados para identificar e encerrar processos que estão utilizando a determinadas portas no Linux.
 
