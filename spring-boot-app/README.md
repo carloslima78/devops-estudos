@@ -219,7 +219,7 @@ java -jar target/demo-0.0.1-SNAPSHOT.jar
 
 ![imagem](imagens/jar.png)
 
-Ao requisitar a aplicação no navegador, nota-se conforme a imagem abaixo que a aplicação está funcionando imprimindo os dados da máquina de hospedagem
+Ao requisitar a aplicação no navegador, nota-se conforme a imagem abaixo que a aplicação está funcionando imprimindo os dados da máquina de hospedagem.
 
 ![imagem](imagens/localhost.png)
 
@@ -227,6 +227,7 @@ Ao requisitar a aplicação no navegador, nota-se conforme a imagem abaixo que a
 5. Interrompendo a execução da aplicação.
 
 **Ctrl + C (Interromper no Terminal)**: No terminal onde a aplicação foi iniciada, pressionar Ctrl + C interromperá a execução da aplicação.
+
 
 ## Como encerrar um processo em execução escutando uma porta específica no Linux
 
