@@ -1,10 +1,12 @@
 # Docker
 
-Docker Engine trata-se de uma ferramenta para criar e interagir com containers Linux.
+Docker é uma plataforma de código aberto que permite empacotar, distribuir e executar aplicativos em ambientes isolados chamados contêineres. Esses contêineres encapsulam o código, bibliotecas e dependências, garantindo consistência entre diferentes ambientes, desde o desenvolvimento até a produção. 
+
+Ao proporcionar uma solução padronizada para o empacotamento de aplicativos, o Docker simplifica significativamente o processo de implantação, escalabilidade e gerenciamento de aplicações em diversos cenários, tornando-se uma ferramenta essencial na era da computação em nuvem e cultura DevOps.
 
 - **Docker** é a empresa que criou o **Docker Engine**.
 - Conteiners existem a bastante tempo no Linux, o Docker apenas disponibiliza um ferramental para interagir com os conteiners.
-- Embora containers seajam executados em ambientes Windows, Linux e Mac, em ambiente Linux é mais performático, pois containers são naturalmente Linux.
+- Embora seja possível a execução de containers em ambientes Windows, Linux e Mac, em ambiente Linux sempre será mais performático, pois containers são naturalmente Linux.
 
 ## Sobre o Mão na Massa ...
 
