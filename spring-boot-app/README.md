@@ -214,8 +214,15 @@ O arquivo executável **demo-0.0.1-SNAPSHOT.jar** foi criado com sucesso.
 4. Opcionalmente, execute a aplicação iniciando-a a partir do arquivo JAR gerado nos passos anteriores.
 
 ```hcl
-java -jar target/seu-arquivo.jar
+java -jar target/demo-0.0.1-SNAPSHOT.jar
 ```
+
+![imagem](imagens/jar.png)
+
+Ao requisitar a aplicação no navegador, nota-se conforme a imagem abaixo que a aplicação está funcionando imprimindo os dados da máquina de hospedagem
+
+![imagem](imagens/localhost.png)
+
 
 5. Interrompendo a execução da aplicação.
 
