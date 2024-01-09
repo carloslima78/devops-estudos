@@ -540,12 +540,6 @@ docker tag demospringbootimage carloslimadocker78/demospringbootimage:latest
 docker login
 ```
 
-- Comando para publicar a imagem com a tag v1:
-
-```hcl
-docker push carloslimadocker78/demospringbootimage:v1
-```
-
 - Comando para publicar a imagem com a tag latest:
 
 ```hcl
@@ -556,7 +550,14 @@ docker push carloslimadocker78/demospringbootimage:latest
 
 ![imagem](imagens/dockerhub.png)
 
-- Execute o container basedo na imagem publicada no Docker Hub:
+
+- Opcionalmente, baixe a imagem publicada no Docker Hub:
+
+```hcl
+docker pull carloslimadocker78/demospringbootimage:latest
+```
+
+- Execute o container diretamente basedo na imagem publicada no Docker Hub:
 
 ```hcl
 docker container run -d --name  demospringboot -p 8080:8080 carloslimadocker78/demospringbootimage:latest
