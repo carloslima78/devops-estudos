@@ -16,13 +16,31 @@ Na documentação do repositório são explicados os pré requisitos para uma ap
 
 ## Conteiner
 
-Trata-se da execução do recurso provisionado a partir de uma imagem.
+Um contêiner é uma unidade leve e independente que pode executar aplicativos e suas dependências, encapsulando-os em um ambiente isolado. 
+
+Contêineres compartilham o kernel do sistema operacional com o host, mas têm seu próprio sistema de arquivos, processos e recursos isolados. 
+
+Eles oferecem portabilidade e consistência, permitindo que aplicativos sejam executados de maneira confiável em diferentes ambientes, desde desenvolvimento até produção.
 
 ## Imagem
 
-Trata-se do artefato contendo os componentes necessários para execução de um conteiner.
+Uma imagem é um pacote executável que contém tudo o que é necessário para executar um aplicativo, incluindo código-fonte, bibliotecas, dependências, variáveis de ambiente e configurações. 
 
-**Observação**: Sobre imagem e conteiner podemos fazer um paralelo com a orientação a objetos, onde a imagem é a classe e o conteiner é o objeto instanciado a partir da classe, ou seja, um conteiner é lançado a partir de uma imagem.
+As imagens são a base dos contêineres. Elas são criadas a partir de um conjunto de instruções definidas em um arquivo chamado Dockerfile e podem ser compartilhadas e reutilizadas por meio de um registro, como o Docker Hub. 
+
+As imagens fornecem consistência e padronização, garantindo que os contêineres gerados a partir delas tenham o mesmo ambiente em qualquer lugar.
+
+## Conteiner vs Imagem
+
+Fazendo um paralelo com a orientação a objetos, podemos comparar uma imagem de contêiner ao conceito de classe e um contêiner ao objeto instanciado dessa classe. 
+
+A imagem, como uma classe, serve como um modelo ou blueprint, contendo o código-fonte, bibliotecas, configurações e dependências necessárias para o aplicativo. Assim como uma classe é uma descrição abstrata de um objeto, uma imagem é uma representação abstrata de um ambiente de execução.
+
+Da mesma forma, quando iniciamos um contêiner, estamos essencialmente criando uma instância executável da imagem, assim como quando criamos um objeto a partir de uma classe em programação orientada a objetos. 
+
+Cada contêiner lançado a partir da mesma imagem é uma instância independente, isolada e em execução, semelhante à criação de múltiplos objetos a partir da mesma classe em um contexto de programação. Essa analogia destaca como as imagens proporcionam consistência e reutilização, enquanto os contêineres representam as instâncias dinâmicas e isoladas que podem ser executadas em diferentes ambientes.
+
+ Resumindo, conforme a orientação a objetos, a imagem é a classe e o conteiner é o objeto instanciado a partir da classe, ou seja, um conteiner é lançado a partir de uma imagem.
 
 ## Virtualização vs Conteinirização
 
