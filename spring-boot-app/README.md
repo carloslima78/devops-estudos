@@ -37,11 +37,15 @@ Release:	22.04
 Codename:	jammy
 ```
 
-1. Embora seja página virada para muitos, vale ressaltar que será necessária uma IDE de desenvolvimento, neste caso foi utilizado o **InteliJJ Community Edition**, mas temos outras boas IDEs como o Spring Tool Suite, o Eclipse, VS Code, etc.
+## IDE de Desenvolvimento
+
+Embora seja página virada para muitos, vale ressaltar que será necessária uma IDE de desenvolvimento, neste caso foi utilizado o **InteliJJ Community Edition**, mas temos outras boas opções como o Spring Tool Suite, o Eclipse, VS Code, etc.
 
 ![imagem](imagens/InteliJJ.png)
 
-2. Garanta que o Java JDK está instalado e a versão é compatível com o projeto que está iniciando, neste cenário trata-se do **Java 17**.
+## Java JDK
+
+Garanta que o Java JDK está instalado e a versão é compatível com o projeto que está iniciando, neste cenário trata-se do **Java 17**.
 
 - Comando para verificar a versão do Java instalado.
 
@@ -70,7 +74,6 @@ java --version
 openjdk 17.0.9 2023-10-17
 OpenJDK Runtime Environment (build 17.0.9+9-Ubuntu-122.04)
 OpenJDK 64-Bit Server VM (build 17.0.9+9-Ubuntu-122.04, mixed mode, sharing)
-
 ```
 
 - Arquivo **pom.xml** tageando a versão 17 do Java.
@@ -94,7 +97,9 @@ OpenJDK 64-Bit Server VM (build 17.0.9+9-Ubuntu-122.04, mixed mode, sharing)
 ![imagem](imagens/debug-configurations.png)
 
 
-3. Garanta que o **Maven** esteja instalado e apontando para a versão correta do Java, neste caso o 17.
+## Maven
+
+Garanta que o gerenciador de pacotes **Maven** esteja instalado e apontando para a versão correta do Java, neste caso o 17.
 
 - Comando para verificar a versão do Maven. Neste caso, nota-se que o Maven está apontando para a versão correta do Java, a 17, conforme a linha *Java version: 17.0.9, vendor: Private Build, runtime: /usr/lib/jvm/java-17-openjdk-amd64*. 
 
@@ -114,6 +119,8 @@ OS name: "linux", version: "6.2.0-39-generic", arch: "amd64", family: "unix"
 
 ```hcl
 echo $JAVA_HOME
+
+/usr/lib/jvm/java-17-openjdk-amd64
 ```
 
 - Caso precise atualizar a versão do Maven, remova a versão anterior com o comando abaixo. Isso excluirá a configuração do Maven, os arquivos de dados e suas dependências
@@ -158,9 +165,13 @@ OS name: "linux", version: "6.2.0-39-generic", arch: "amd64", family: "unix"
 fonte: (https://keepgrowing.in/java/how-to-fix-error-executing-maven-issue-after-updating-to-java-17/)
 
 
-## Gerando o arquivo executável .Jar
+### Gerando o arquivo executável .Jar
 
-1. Compilar o projeto. :
+Dentro da pasta do projeto, executar os comandos abaixo:
+
+![imagem](imagens/mvn.png)
+
+1. Compile o projeto:
 
 ```hcl
 mvn compile
@@ -168,13 +179,13 @@ mvn compile
 
 Este comando compila o código-fonte do projeto, gerando os arquivos compilados na pasta target.
 
-2. Executa os testes no projeto.
+2. Execute os testes no projeto.
 
 ```hcl
 mvn test
 ```
 
-3. Gera o arquivo JAR do projeto na pasta target, que pode ser executado ou distribuído.
+3. Gere o arquivo JAR do projeto na pasta target, que pode ser executado ou distribuído.
 
 ```hcl
 mvn package
@@ -191,11 +202,21 @@ Este comando realiza uma limpeza do projeto removendo os artefatos compilados e 
 
 O objetivo install não apenas gera o artefato (geralmente um JAR) como o comando package, mas também o instala no repositório local do Maven, tornando-o disponível para outros projetos no mesmo ambiente de desenvolvimento.
 
-4. Executa a aplicação iniciando-a a partir do arquivo JAR gerado nos passos anteriores.
+Conforme a imagem abaixo, após a executção do comando mvn clean install, espera-se que tenha criado a pasta *target* onde estará o arquivo .JAR executável:
+
+![imagem](imagens/![imagem](imagens/mvn.png).png)
+
+O arquivo executável **demo-0.0.1-SNAPSHOT.jar** foi criado com sucesso. 
+
+![imagem](imagens/![imagem](imagens/jar.png).png)
+
+
+4. Opcionalmente, execute a aplicação iniciando-a a partir do arquivo JAR gerado nos passos anteriores.
 
 ```hcl
 java -jar target/seu-arquivo.jar
 ```
+
 5. Interromper a execução da aplicação.
 
 **Ctrl + C (Interromper no Terminal)**: No terminal onde a aplicação foi iniciada, pressionar Ctrl + C interromperá a execução da aplicação.
@@ -224,10 +245,10 @@ kill -9 $(lsof -t -i:8080)
 
 ## Conclusão
 
-Após a conclusão bem-sucedida dos passos utilizando o Maven, a aplicação Java encontra-se pronta para ser implementada em ambientes de contêineres, como Docker e Kubernetes. 
+Após a conclusão bem-sucedida dos passos utilizando o Maven, a aplicação Java encontra-se pronta para ser implementada em ambientes de contêineres, como *Docker* e *Kubernetes*. 
 
 O processo de construção do JAR através do Maven proporciona uma artefato independente que encapsula a aplicação e suas dependências. 
 
-Esse JAR pode ser facilmente incorporado em uma imagem Docker, facilitando a criação de contêineres isolados e portáteis. Ao empacotar a aplicação dessa maneira, torna-se simples a implantação e escalabilidade em clusters orquestrados por Kubernetes, onde imagens contendo o JAR podem ser gerenciadas eficientemente. 
+Esse arquivo .JAR pode ser facilmente incorporado em uma imagem Docker, facilitando a criação de contêineres isolados e portáteis. Ao empacotar a aplicação dessa maneira, torna-se simples a implantação e escalabilidade em clusters orquestrados por Kubernetes, onde imagens contendo o JAR podem ser gerenciadas eficientemente. 
 
 A abordagem centrada em contêineres proporciona uma solução ágil e consistente para a distribuição e execução da aplicação em ambientes DevOps modernos.

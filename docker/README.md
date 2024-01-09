@@ -55,17 +55,13 @@ Passos para instalação do Docker no ambiente Linux Ubuntu:
 - Comando de instalação:
 
 ```hcl
-
 sudo apt install docker-ce
-
 ```
 
 - Comando para verificar o status da instalação:
 
 ```hcl
-
 sudo systemctl status docker
-
 ```
 
 ## Comandos Básicos do Docker
@@ -74,77 +70,50 @@ Criação do clássico e acadêmico container **Hello World**, é executado base
 
 - Comando para lançar o container **Hello World**: 
 
-
 ```hcl
-
-docker container run hello-world
-
-```
-
-- Lançando o container Hello World nomeando-o:
-
-```hcl
-
-docker container run --name meucontainer hello-world
-
+docker container run --name meucontainerhelloworld hello-world
 ```
 
 - Comando para listar apenas os conteiners que estão em execução:
 
 ```hcl
-
 docker container ls
-
 ```
 
 - Comando para listar todos os conteiners tanto em execução quanto os encerrados:
 
 ```hcl
-
 docker container ls -a
-
-```
-
-- Comando para remover um conteiner em execução pelo nome do container ou nome da imagem:
-
-```hcl
-
-docker container rm nomedocontainer
-
 ```
 
 - Comando para listar os logs de um container:
 
 ```hcl
-
 docker logs nomedocontainer
-
 ```
 
-- Comandos para parar e remover um container:
+- Comando para parar um container:
 
 ```hcl
-
 docker container stop nomedocontainer
+```
 
+- Comando para remover um container:
+
+```hcl
 docker container rm nomedocontainer
-
 ```
 
 - Comando para remover um container sem a necessidade de pará-los antes:
 
 ```hcl
-
 docker container rm -f nomedocontainer
-
 ```
 
 - Comando para remover todos os containers em execução de uma só vez via sub comando:
 
 ```hcl
-
 docker container rm -f $(docker container ls -a q)
-
 ```
 
 ### Modo Interativo
@@ -156,15 +125,12 @@ Trata-se da execução de um container acessando o seu terminal de forma que sej
 - Lançando um container *Ubuntu* acessando seu terminal via bash:
 
 ```hcl
-
 docker container run -it ubuntu /bin/bash
-
 ```
 
 Após a execução do container *Ubuntu* no modo interativo, será possível realizar instalações como *apt get update && apt install curl* como sendo um sistema operacional.
 
 ```hcl
-
 apt update
 
 install curl
@@ -172,15 +138,12 @@ install curl
 curl https://www.google.com.br
 
 sudo docker container run -it ubuntu /bin/bash
-
 ```
 
 O comando "exit" sai do modo interativo do conteiner:
 
 ```hcl
-
 exit
-
 ```
 
 ### Port Bind
@@ -190,9 +153,7 @@ Trata-se do recurso que permite associar a porta de um container com a porta da 
 - Comando para associar a porta 8080 da máquina local com a porta 80 do container NGINX, permitindo acesso via navegador:
 
 ```hcl
-
 docker container run -d -p 8080:80 nginx
-
 ```
 
 #### Container NGINX
@@ -200,9 +161,7 @@ docker container run -d -p 8080:80 nginx
 - Lançando um container *nginx* 
 
 ```hcl
-
 docker container run nginx
-
 ```
 
 Após a execução do container *nginx*, o terminal seguirá travado pelo fato de que o nginx é um servidor de execução contínua.
@@ -210,17 +169,13 @@ Após a execução do container *nginx*, o terminal seguirá travado pelo fato d
 Para evitar o travamento do terminal conforme citado acima, será necessário executar o container em modo *backgound (Deamon)* conforme comnado abaixo:
 
 ```hcl
-
 docker container run -d -p 8080:80 nginx
-
 ```
 
 - Comando para operar um container nginx já em execução em modo interativo:
 
 ```hcl
-
 docker container exec -it nomedocontainer /bin/bash
-
 ```
 
 Após a execução do container nginx em modo interativo, executando o comando **curl localhost/80** será apresentada o *HTML* da página inicial do NGINX.
@@ -240,9 +195,7 @@ Tratam-se de configurações que podem ser definidas e acessados ​​durante a
 
 
 ```hcl
-
 docker container run -d -p 5432:5432 -e POSTGRES_DB=nome-do-BD -e POSTGRES_USER=admin -e POSTGRES_PASSWORD=1234 postgres
-
 ```
 
 ## Contruindo uma Imagem Docker
